@@ -1,0 +1,8 @@
+dnspython
+cryptography
+pycrypto
+boto
+netaddr
+MarkupSafe
+ansible
+passlib

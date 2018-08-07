@@ -1,0 +1,5 @@
+[nodes]
+do_master ansible_python_interpreter=/usr/bin/python3
+do_node_1 ansible_python_interpreter=/usr/bin/python3
+do_node_2 ansible_python_interpreter=/usr/bin/python3
+do_node_3 ansible_python_interpreter=/usr/bin/python3

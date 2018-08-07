@@ -1,0 +1,32 @@
+#!/bin/bash
+
+PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+VENV="$PROJECT_ROOT/.venv"
+
+if [ ! -e "$VENV" ]; then
+    if [ `uname -s` == "Darwin" ]; then
+        brew install python libffi openssl
+        curl https://bootstrap.pypa.io/ez_setup.py -o - | python
+        easy_install pip
+        pip install virtualenv
+
+    elif [ `uname -s` == "Linux" ]; then
+        sudo apt-get install python-virtualenv python-dev libffi-dev libssl-dev
+    fi
+
+    virtualenv $VENV
+    source $VENV/bin/activate
+    pip install -r $PROJECT_ROOT/requirements.txt
+    if [ $? -ne 0 ]; then
+        rm -rf $VENV
+        exit 1
+    fi
+fi
+
+if [ ! -z "$1" ]; then
+    source $VENV/bin/activate
+    if [ -e "$PROJECT_ROOT/.aws-credentials" ]; then
+        source $PROJECT_ROOT/.aws-credentials
+    fi
+    $VENV/bin/ansible-playbook $*
+fi
