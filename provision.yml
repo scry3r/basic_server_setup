@@ -17,7 +17,7 @@
     username: devuser
 
     # Check the README for information about creating a hashed password
-    password: $6$rounds=656000$L40GiyDPuxE1f/kS$fswrMKHVZz3yiruJGoY2BPYHy3viKVIH5Mkb8.AUo8K8eAL7VMoagXVCu7pgn4f3GMYAbra3sAN.hKqr7MANc/
+    password: 
     public_key: ~/.ssh/id_rsa.pub
 
   roles:

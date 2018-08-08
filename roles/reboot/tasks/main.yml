@@ -1,22 +1,6 @@
 ---
 
-- name: Reboot the server
-  shell: sleep 2 && shutdown -r now "Ansible package updates triggered"
+- name: Reboot host
+  shell: sleep 2 && /sbin/shutdown -r now "Ansible system reboot"
   async: 1
   poll: 0
-  ignore_errors: true
- 
-- name: Wait for server to shutdown
-  local_action: shell ssh -o BatchMode=yes -o ConnectTimeout=2 -o StrictHostKeyChecking=no "{{ target_user }}@{{ target_host }}" true
-  register: result
-  until: result.rc != 0
-  failed_when: result.rc == -1
-  retries: 200
-  delay: 1
- 
-- name: Wait for server to be ready
-  local_action: shell ssh -o BatchMode=yes -o ConnectTimeout=2 -o StrictHostKeyChecking=no "{{ target_user }}@{{ target_host }}" true
-  register: result
-  until: result.rc == 0
-  retries: 200
-  delay: 3
